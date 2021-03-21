@@ -1,10 +1,11 @@
+use super::super::auth::BasicAuth;
 use rocket_contrib::json::JsonValue;
 
 // you need to specify the content type when pass format
 // to the endpoint
 // curl 127.0.0.1:8000/rustaceans -X POST -H 'Content-type: application/json'
 #[post("/rustaceans", format = "json")]
-pub fn create_rustacean() -> JsonValue {
+pub fn create_rustacean(_auth: BasicAuth) -> JsonValue {
     json!([
         {
             "id": 3,

@@ -4,6 +4,7 @@ mod controllers;
 extern crate rocket;
 #[macro_use]
 extern crate rocket_contrib;
+
 use controllers::{common, rustaceans};
 
 #[rocket::main]

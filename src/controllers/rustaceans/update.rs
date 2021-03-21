@@ -1,7 +1,8 @@
+use super::super::auth::BasicAuth;
 use rocket_contrib::json::JsonValue;
 
 #[put("/rustaceans/<id>", format = "json")]
-pub fn update_rustacean(id: i32) -> JsonValue {
+pub fn update_rustacean(id: i32, _auth: BasicAuth) -> JsonValue {
     json!([
         {
             "id": id,

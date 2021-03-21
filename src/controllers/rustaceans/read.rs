@@ -1,7 +1,9 @@
+use super::super::auth::BasicAuth;
+
 use rocket_contrib::json::JsonValue;
 
 #[get("/rustaceans")]
-pub fn get_rustaceans() -> JsonValue {
+pub fn get_rustaceans(_auth: BasicAuth) -> JsonValue {
     json!([
         {
             "id":1,
