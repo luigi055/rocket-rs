@@ -20,7 +20,7 @@ async fn main() {
                 rustaceans::delete_rustaceans
             ],
         )
-        .register(catchers![common::send_not_found])
+        .register(catchers![common::send_not_found, common::send_unauthorized])
         .launch()
         .await;
 }

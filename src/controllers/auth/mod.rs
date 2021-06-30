@@ -14,6 +14,7 @@ pub struct BasicAuth {
 impl BasicAuth {
     fn from_authorization_header(header: &str) -> Option<BasicAuth> {
         let split = header.split_whitespace().collect::<Vec<_>>();
+  
         if split.len() != 2 {
             return None;
         }
@@ -24,22 +25,34 @@ impl BasicAuth {
 
         Self::from_base64_encoded(split[1])
     }
+
     // Basic 8113h9dueqfnefno
-    fn from_base64_encoded(base64_string: &str) -> Option<BasicAuth> {
-        let decoded = base64::decode(base64_string).ok()?; // this converts results into an option
-        let decoded_str = String::from_utf8(decoded).ok()?;
-        let split = decoded_str.split(":").collect::<Vec<_>>();
+    fn from_base64_encoded(bases64_string: &str) -> Option<BasicAuth> {
+    let decoded = base64::decode(bases64_string).ok()?;
+    let decoded_str = String::from_utf8(decoded).ok()?;
+    let split = decoded_str.split(":").collect::<Vec<_>>();
+    println!("CALLED!");
 
-        // If exactly username & password pair are present
-
-        if split.len() != 2 {
-            return None;
-        }
-
-        let (username, password) = (split[0].to_string(), split[1].to_string());
-
-        Some(BasicAuth { username, password })
+    // validate username+password pair is present
+    if split.len() != 2 {
+        return None;
     }
+
+    let (username, password) = (split[0].to_string(), split[1].to_string());
+
+    if username != "foo" {
+        return None;
+    }
+
+    if password != "bar"  {
+        return None;
+    }
+
+    Some(BasicAuth {
+        username,
+        password
+    })
+}
 }
 
 #[rocket::async_trait]
